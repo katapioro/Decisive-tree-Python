@@ -1,9 +1,10 @@
-# So far the best tutorial i could've found:
-# https://www.datacamp.com/community/tutorials/decision-tree-classification-python
 
-# Importing required Libraries
 
+
+
+#Link to data: https://www.kaggle.com/aungpyaeap/tictactoe-endgame-dataset-uci
 #Imports for Decision tree itself
+
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier  # Import Decision Tree Classifier
 from sklearn.model_selection import train_test_split  # Import train_test_split function
@@ -18,20 +19,20 @@ import graphviz
 
 
 # Loading Data
-col_names = ['pregnant', 'glucose', 'bp', 'skin', 'insulin', 'bmi', 'pedigree', 'age', 'outcome']
+column_names = ['V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9', 'V10']
 # load dataset
-pima = pd.read_csv("diabetes.csv", header=None, names=col_names)
-pima.head()
+Dataset = pd.read_csv("TicTacToe.csv", header=0, names=column_names)
+Dataset.head()
 
 # Data selection
 # split dataset in features and target variable
 
-feature_cols = ['pregnant', 'glucose', 'bp', 'insulin', 'bmi', 'pedigree', 'age']
-X = pima[feature_cols]  # Features
-y = pima.outcome  # Target variable
+feature_columns = ['V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9']
+X = Dataset[feature_columns]  # Features
+y = Dataset.V10  # Target variable
 
 # Split dataset into training set and test set
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=1)  # 70% training and 30% test
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=1)
 
 # Building Decision Tree Model
 # Create Decision Tree classifer object
