@@ -2,11 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad8facde-ce64-4cb2-81f9-f19f3f1285ba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/TreeTacToe.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mydecisiontree.png" beforeDir="false" afterPath="$PROJECT_DIR$/mydecisiontree.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tictac.py" beforeDir="false" afterPath="$PROJECT_DIR$/tictac.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/w3school.py" beforeDir="false" afterPath="$PROJECT_DIR$/w3school.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicTacToe.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TreeTacToe.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diabetes.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/diabetes.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mydecisiontree.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/originaltic-tac-toe-endgame.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shows.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tictac.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/titanic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/w3school.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,16 +188,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/w3school.py</url>
-          <line>2</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

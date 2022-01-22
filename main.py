@@ -1,55 +1,39 @@
-# So far the best tutorial i could've found:
-# https://www.datacamp.com/community/tutorials/decision-tree-classification-python
+# https://github.com/codebasics/py/blob/master/ML/9_decision_tree/Exercise/titanic.csv - DATASET
 
-# Importing required Libraries
-
-#Imports for Decision tree itself
-import pandas as pd
-from sklearn.tree import DecisionTreeClassifier  # Import Decision Tree Classifier
-from sklearn.model_selection import train_test_split  # Import train_test_split function
-from sklearn import metrics  # Import scikit-learn metrics module for accuracy calculation
-#Imports for visualizing decision tree
-from six import StringIO
-from IPython.display import Image
-from sklearn.tree import export_graphviz
+import pandas
+from sklearn import tree
 import pydotplus
-import graphviz
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
+import matplotlib.image as pltimg
 
+# Loading data
+dataset = pandas.read_csv("titanic.csv")
 
+# Getting rid of data that wont be used
+dataset.drop(['PassengerId', 'Name', 'SibSp', 'Parch', 'Ticket', 'Cabin', 'Embarked'], axis='columns', inplace=True)
+# Some functions requre floats, so we need to change the dataset a bit:
+d = {'male': 0, 'female': 1}
+dataset['Sex'] = dataset['Sex'].map(d)
 
-# Loading Data
-col_names = ['pregnant', 'glucose', 'bp', 'skin', 'insulin', 'bmi', 'pedigree', 'age', 'outcome']
-# load dataset
-pima = pd.read_csv("diabetes.csv", header=None, names=col_names)
-pima.head()
+# We dont know every person's age so we have to fill blank values with mean.
+dataset.Age = dataset.Age.fillna(dataset.Age.mean())
 
-# Data selection
-# split dataset in features and target variable
+# Dividing the values into parameters and the result
+inputs = dataset.drop('Survived', axis='columns')
+target = dataset.Survived
 
-feature_cols = ['pregnant', 'glucose', 'bp', 'insulin', 'bmi', 'pedigree', 'age']
-X = pima[feature_cols]  # Features
-y = pima.outcome  # Target variable
+# Creating the Tree
+dtree = DecisionTreeClassifier(max_depth=4)
+dtree = dtree.fit(inputs, target)
 
-# Split dataset into training set and test set
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=1)  # 70% training and 30% test
+# Functions necessary for exporting tree to png
+data = tree.export_graphviz(dtree, out_file=None, feature_names=dataset.columns[1:5],
+                            class_names=['Died', 'Survive'], rounded=True, filled=True)
 
-# Building Decision Tree Model
-# Create Decision Tree classifer object
-clf = DecisionTreeClassifier(criterion="gini", max_depth=4)
+graph = pydotplus.graph_from_dot_data(data)
+graph.write_png('titanic.png')
 
-# Train Decision Tree Classifer
-clf = clf.fit(X_train, y_train)
+img = pltimg.imread('titanic.png')
+imgplot = plt.imshow(img)
 
-# Predict the response for test dataset
-y_pred = clf.predict(X_test)
-
-# Model Accuracy, how often is the classifier correct?
-print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
-
-dot_data = StringIO()
-export_graphviz(clf, out_file=dot_data,
-                filled=True, rounded=False,
-                special_characters=True,  class_names=['Diabetes negative','Diabetes positive'])
-graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
-graph.write_png('diabetes.png')
-Image(graph.create_png())
