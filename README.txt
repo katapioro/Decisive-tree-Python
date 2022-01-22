@@ -14,3 +14,7 @@ we should do the same because we have negative, time and at least I, negative wi
 
 So yeah: basically you have to work on tictac.py until you either die of get it done.
 Gl
+
+
+EDIT: 
+Now the min focus is one the titanic.py as the tic-tac-toe's data turned out to be an awful experience
