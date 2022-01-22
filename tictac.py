@@ -1,56 +1,45 @@
 
+# Link to data: https://www.kaggle.com/aungpyaeap/tictactoe-endgame-dataset-uci
+# Imports for Decision tree itself
 
-
-
-#Link to data: https://www.kaggle.com/aungpyaeap/tictactoe-endgame-dataset-uci
-#Imports for Decision tree itself
-
-import pandas as pd
-from sklearn.tree import DecisionTreeClassifier  # Import Decision Tree Classifier
-from sklearn.model_selection import train_test_split  # Import train_test_split function
-from sklearn import metrics  # Import scikit-learn metrics module for accuracy calculation
-#Imports for visualizing decision tree
-from six import StringIO
-from IPython.display import Image
-from sklearn.tree import export_graphviz
+import pandas
+from sklearn import tree
 import pydotplus
-import graphviz
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
+import matplotlib.image as pltimg
 
+# Loading data
 
+dataset = pandas.read_csv("TicTacToe.csv")
 
-# Loading Data
-column_names = ['V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9', 'V10']
-# load dataset
-Dataset = pd.read_csv("TicTacToe.csv", header=0, names=column_names)
-Dataset.head()
+# Further functions require numeric values instead of strings, so we need to make a change
+for i in range(1,  10):
+    data = {'x': 1, 'o': 2, 'b': 0}
+    column_name = "V" + str(i)
 
-# Data selection
-# split dataset in features and target variable
+    dataset[column_name] = dataset[column_name].map(data)
 
-feature_columns = ['V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9']
-X = Dataset[feature_columns]  # Features
-y = Dataset.V10  # Target variable
+data = {'positive': 1, 'negative': 0}
+dataset['V10'] = dataset['V10'].map(data)
 
-# Split dataset into training set and test set
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=1)
+# Separating columns between features and target column:
 
-# Building Decision Tree Model
-# Create Decision Tree classifer object
-clf = DecisionTreeClassifier(criterion="gini", max_depth=4)
+features = ['V1' ,'V2' ,'V3' ,'V4' ,'V5', 'V6' ,'V7' ,'V8' ,'V9']
+X = dataset[features]
+y = dataset['V10']
 
-# Train Decision Tree Classifer
-clf = clf.fit(X_train, y_train)
+#Create a Decision Tree, save it as an image, and show the image:
+dtree = DecisionTreeClassifier(max_depth=4)
+dtree = dtree.fit(X, y)
 
-# Predict the response for test dataset
-y_pred = clf.predict(X_test)
+data = tree.export_graphviz(dtree, filled=True, rounded=False,
+                special_characters=True,  class_names=['0','1'], feature_names=features)
+print(type(data))
 
-# Model Accuracy, how often is the classifier correct?
-print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
+graph = pydotplus.graph_from_dot_data(data)
+print()
+graph.write_png('TreeTacToe.png')
 
-dot_data = StringIO()
-export_graphviz(clf, out_file=dot_data,
-                filled=True, rounded=False,
-                special_characters=True,  class_names=['Diabetes negative','Diabetes positive'])
-graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
-graph.write_png('diabetes.png')
-Image(graph.create_png())
+img=pltimg.imread('TreeTacToe.png')
+imgplot = plt.imshow(img)

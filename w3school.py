@@ -14,7 +14,8 @@ df['Nationality'] = df['Nationality'].map(d)
 d = {'YES': 1, 'NO': 0}
 df['Go'] = df['Go'].map(d)
 
-print(df)
+print(df.head(2))
+print(df.head(5))
 
 
 features = ['Age', 'Experience', 'Rank', 'Nationality']
