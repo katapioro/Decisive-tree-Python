@@ -8,5 +8,5 @@ Python language was used to create the code.
 Free dataset was downloaded from https://github.com/codebasics/py/blob/master/ML/9_decision_tree/Exercise/titanic.csv
 
 ## Project status
-In the final's phase.
-    Waiting for the supervisor's approval.
+finished.
+Documentation is in progress.
